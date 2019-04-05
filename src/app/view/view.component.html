@@ -1,0 +1,8 @@
+﻿<div class="jumbotron">
+    <h1>{{cliente.nome | uppercase}}</h1>
+    CPF: <input class="form-control" type="text" placeholder="{{cliente.cpf}}" disabled>
+    <p>Endereço: {{cliente.endereco.logradouro}}, {{cliente.endereco.bairro}}, {{cliente.endereco.cidade}}-{{cliente.endereco.uf}}</p>
+    <p>Telefones: {{cliente.telefones}}</p>
+    <p>Emails: {{cliente.emails}}</p>
+</div>
+<p><a class="btn btn-primary" [routerLink]="['']">VOLTAR</a>   <a *ngIf="isAdmin()" class="btn btn-danger" (click)="deletar(cliente.id)">DELETAR</a></p>

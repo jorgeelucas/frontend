@@ -1,0 +1,22 @@
+﻿<h1>CLIENTES!</h1>
+<p>Usuario está logado como {{localUser.role}}!!</p>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Visualizar</th>
+        <th *ngIf="isAdmin()" scope="col">Deletar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <th scope="row">{{cliente.id}}</th>
+        <td>{{cliente.nome}}</td>
+        <td><a [routerLink]="['/visualizar', cliente.id]" class="text-danger">Visualizar</a></td>
+        <td *ngIf="isAdmin()"><a (click)="deleteUser(cliente.id)" class="text-danger">Deletar</a></td>
+      </tr>
+    </tbody>
+  </table>
+<p><a [routerLink]="['/login']">Logout</a></p>
+<p *ngIf="isAdmin()"><a [routerLink]="['/registrar']">Registrar novo</a></p>

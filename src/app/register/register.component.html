@@ -1,0 +1,111 @@
+﻿<h2>REGISTRAR NOVO CLIENTE</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="form-group" class="col-lg-7">
+            <input placeholder="Nome" type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+            <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                <div *ngIf="f.nome.errors.required">Campo obrigatório</div>
+            </div>
+        </div>
+        <div class="form-group" class="col-lg-5">
+            <input placeholder="CPF" type="text" formControlName="cpf" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }" />
+            <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
+                <div *ngIf="f.cpf.errors.required">Campo obrigatório</div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+            <div class="form-group" formGroupName="endereco" class="col-lg-3">
+                <input 
+                    placeholder="CEP"
+                    type="text" 
+                    formControlName="cep" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.cep.errors }"
+                    (blur)="preencheEndereco($event.target.value)" />
+                <div *ngIf="submitted && f.cep.errors" class="invalid-feedback">
+                    <div *ngIf="f.cep.errors.required">CEP obrigatorio</div>
+                </div>
+            </div>
+            <div class="form-group" formGroupName="endereco" class="col-lg-9">
+                <input
+                    placeholder="Logradouro" 
+                    type="text" 
+                    formControlName="logradouro" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.logradouro.errors }"/>
+                <div *ngIf="submitted && f.logradouro.errors" class="invalid-feedback">
+                    <div *ngIf="f.logradouro.errors.required">Campo obrigatorio</div>
+                </div>
+            </div>
+
+        </div>    
+        <div class="row">
+            <div class="form-group" formGroupName="endereco" class="col-lg-5">
+                <input 
+                    placeholder="Bairro"
+                    type="text" 
+                    formControlName="bairro" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.bairro.errors }"/>
+                <div *ngIf="submitted && f.bairro.errors" class="invalid-feedback">
+                    <div *ngIf="f.bairro.errors.required">Campo obrigatorio</div>
+                </div>
+            </div>
+
+            <div class="form-group" formGroupName="endereco" class="col-lg-5">
+                <input 
+                    placeholder="Cidade"    
+                    type="text" 
+                    formControlName="cidade" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.cidade.errors }"/>
+                <div *ngIf="submitted && f.cidade.errors" class="invalid-feedback">
+                    <div *ngIf="f.cidade.errors.required">Campo obrigatorio</div>
+                </div>
+            </div>
+            <div class="form-group" formGroupName="endereco" class="col-lg-2">
+                <input 
+                placeholder="UF"
+                    type="text" 
+                    formControlName="uf" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.uf.errors }"/>
+                <div *ngIf="submitted && f.uf.errors" class="invalid-feedback">
+                    <div *ngIf="f.uf.errors.required">Campo obrigatorio</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group" formGroupName="endereco">
+            <input 
+                placeholder="Compelemento"
+                type="text" 
+                formControlName="complemento" 
+                class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && f.complemento.errors }"/>
+            <div *ngIf="submitted && f.complemento.errors" class="invalid-feedback">
+                <div *ngIf="f.uf.errors.required">Campo obrigatorio</div>
+            </div>
+        </div>
+    <div class="form-group">
+        <input placeholder="Telefones" type="text" formControlName="telefones" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telefones.errors }" />
+        <div *ngIf="submitted && f.telefones.errors" class="invalid-feedback">
+            <div *ngIf="f.telefones.errors.required">Campo obrigatório</div>
+            <div *ngIf="f.telefones.errors.minlength">Telefone incorreto</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input placeholder="Emails" type="text" formControlName="emails" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.emails.errors }" />
+        <div *ngIf="submitted && f.emails.errors" class="invalid-feedback">
+            <div *ngIf="f.emails.errors.required">Campo obrigatorio</div>
+            <div *ngIf="f.emails.errors.email">Email incorreto</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Register</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+    </div>
+</form>
